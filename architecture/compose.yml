@@ -1,0 +1,9 @@
+services:
+  structurizr:
+    image: structurizr/lite
+    container_name: structurizr
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/usr/local/structurizr
+    tty: true

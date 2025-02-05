@@ -1,0 +1,724 @@
+{
+  "configuration" : {
+    "scope" : "SoftwareSystem"
+  },
+  "description" : "Decentralized IP Registry and Ownership Management",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedAgent" : "structurizr-ui",
+  "lastModifiedDate" : "2025-02-05T22:24:10Z",
+  "model" : {
+    "people" : [ {
+      "description" : "Artists / Designers / Developers registering IP",
+      "id" : "1",
+      "location" : "Unspecified",
+      "name" : "Creator",
+      "properties" : {
+        "structurizr.dsl.identifier" : "creator"
+      },
+      "relationships" : [ {
+        "description" : "Registers / Mints IP",
+        "destinationId" : "7",
+        "id" : "20",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Registers / Mints IP",
+        "destinationId" : "6",
+        "id" : "21",
+        "linkedRelationshipId" : "20",
+        "sourceId" : "1"
+      }, {
+        "description" : "Registers / Mints IP",
+        "destinationId" : "5",
+        "id" : "22",
+        "linkedRelationshipId" : "20",
+        "sourceId" : "1"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Businesses managing IP Portfolio",
+      "id" : "2",
+      "location" : "Unspecified",
+      "name" : "Startup",
+      "properties" : {
+        "structurizr.dsl.identifier" : "startup"
+      },
+      "relationships" : [ {
+        "description" : "Bulk registrations",
+        "destinationId" : "7",
+        "id" : "23",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Bulk registrations",
+        "destinationId" : "6",
+        "id" : "24",
+        "linkedRelationshipId" : "23",
+        "sourceId" : "2"
+      }, {
+        "description" : "Bulk registrations",
+        "destinationId" : "5",
+        "id" : "25",
+        "linkedRelationshipId" : "23",
+        "sourceId" : "2"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Validates legal ownership",
+      "id" : "3",
+      "location" : "Unspecified",
+      "name" : "Lawyer",
+      "properties" : {
+        "structurizr.dsl.identifier" : "lawyer"
+      },
+      "relationships" : [ {
+        "description" : "Validates ownership",
+        "destinationId" : "8",
+        "id" : "26",
+        "sourceId" : "3",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Validates ownership",
+        "destinationId" : "6",
+        "id" : "27",
+        "linkedRelationshipId" : "26",
+        "sourceId" : "3"
+      }, {
+        "description" : "Validates ownership",
+        "destinationId" : "5",
+        "id" : "28",
+        "linkedRelationshipId" : "26",
+        "sourceId" : "3"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Discovers / Acquires IP",
+      "id" : "4",
+      "location" : "Unspecified",
+      "name" : "Buyer",
+      "properties" : {
+        "structurizr.dsl.identifier" : "buyer"
+      },
+      "relationships" : [ {
+        "description" : "Discovers / Acquires IP",
+        "destinationId" : "9",
+        "id" : "29",
+        "sourceId" : "4",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Discovers / Acquires IP",
+        "destinationId" : "6",
+        "id" : "30",
+        "linkedRelationshipId" : "29",
+        "sourceId" : "4"
+      }, {
+        "description" : "Discovers / Acquires IP",
+        "destinationId" : "5",
+        "id" : "31",
+        "linkedRelationshipId" : "29",
+        "sourceId" : "4"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "containers" : [ {
+        "components" : [ {
+          "description" : "Registers / Uploads IP",
+          "documentation" : { },
+          "id" : "7",
+          "name" : "Registration / Login",
+          "properties" : {
+            "structurizr.dsl.identifier" : "ipr_chain.frontend.registration"
+          },
+          "relationships" : [ {
+            "description" : "Submits metadata",
+            "destinationId" : "10",
+            "id" : "32",
+            "sourceId" : "7",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Frontend"
+        }, {
+          "description" : "Analytics / Management",
+          "documentation" : { },
+          "id" : "8",
+          "name" : "Dashboard UI",
+          "properties" : {
+            "structurizr.dsl.identifier" : "ipr_chain.frontend.dashboard"
+          },
+          "relationships" : [ {
+            "description" : "Sends API request",
+            "destinationId" : "10",
+            "id" : "34",
+            "sourceId" : "8",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Frontend"
+        }, {
+          "description" : "IP discovery portal",
+          "documentation" : { },
+          "id" : "9",
+          "name" : "Marketplace",
+          "properties" : {
+            "structurizr.dsl.identifier" : "ipr_chain.frontend.marketplace"
+          },
+          "relationships" : [ {
+            "description" : "Initiates license",
+            "destinationId" : "10",
+            "id" : "35",
+            "sourceId" : "9",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Frontend"
+        } ],
+        "documentation" : { },
+        "id" : "6",
+        "name" : "Frontend Application",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ipr_chain.frontend"
+        },
+        "relationships" : [ {
+          "description" : "Submits metadata",
+          "destinationId" : "10",
+          "id" : "33",
+          "linkedRelationshipId" : "32",
+          "sourceId" : "6"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "description" : "Node.js API",
+        "documentation" : { },
+        "id" : "10",
+        "name" : "Backend Service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ipr_chain.backend"
+        },
+        "relationships" : [ {
+          "description" : "Reads from and writes to",
+          "destinationId" : "15",
+          "id" : "36",
+          "sourceId" : "10",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Mints SPL Token",
+          "destinationId" : "12",
+          "id" : "37",
+          "sourceId" : "10",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Mints SPL Token",
+          "destinationId" : "11",
+          "id" : "38",
+          "linkedRelationshipId" : "37",
+          "sourceId" : "10"
+        }, {
+          "description" : "Set Royalty",
+          "destinationId" : "13",
+          "id" : "39",
+          "sourceId" : "10",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "components" : [ {
+          "description" : "SPL Token Creation",
+          "documentation" : { },
+          "id" : "12",
+          "name" : "Mint Program",
+          "properties" : {
+            "structurizr.dsl.identifier" : "ipr_chain.solana_program.mint_program"
+          },
+          "relationships" : [ {
+            "description" : "On-chain records",
+            "destinationId" : "16",
+            "id" : "40",
+            "sourceId" : "12",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Royalty Management",
+          "documentation" : { },
+          "id" : "13",
+          "name" : "License Program",
+          "properties" : {
+            "structurizr.dsl.identifier" : "ipr_chain.solana_program.license_program"
+          },
+          "relationships" : [ {
+            "description" : "Price Data",
+            "destinationId" : "17",
+            "id" : "43",
+            "sourceId" : "13",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Dispute Resolution",
+          "documentation" : { },
+          "id" : "14",
+          "name" : "DAO Program",
+          "properties" : {
+            "structurizr.dsl.identifier" : "ipr_chain.solana_program.dao_program"
+          },
+          "relationships" : [ {
+            "description" : "Collateral Management",
+            "destinationId" : "18",
+            "id" : "46",
+            "sourceId" : "14",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Wallet Auth",
+            "destinationId" : "19",
+            "id" : "49",
+            "sourceId" : "14",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        } ],
+        "description" : "Smart Contracts / On-chain logic",
+        "documentation" : { },
+        "id" : "11",
+        "name" : "Solana Program",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ipr_chain.solana_program"
+        },
+        "relationships" : [ {
+          "description" : "On-chain records",
+          "destinationId" : "16",
+          "id" : "41",
+          "linkedRelationshipId" : "40",
+          "sourceId" : "11"
+        }, {
+          "description" : "Price Data",
+          "destinationId" : "17",
+          "id" : "44",
+          "linkedRelationshipId" : "43",
+          "sourceId" : "11"
+        }, {
+          "description" : "Collateral Management",
+          "destinationId" : "18",
+          "id" : "47",
+          "linkedRelationshipId" : "46",
+          "sourceId" : "11"
+        }, {
+          "description" : "Wallet Auth",
+          "destinationId" : "19",
+          "id" : "50",
+          "linkedRelationshipId" : "49",
+          "sourceId" : "11"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "description" : "Decentralized Storage",
+        "documentation" : { },
+        "id" : "15",
+        "name" : "Storage",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ipr_chain.storage"
+        },
+        "tags" : "Element,Container,Storage"
+      } ],
+      "description" : "Decentralized IP Registry and Ownership Management",
+      "documentation" : { },
+      "id" : "5",
+      "location" : "Unspecified",
+      "name" : "IPRChain",
+      "properties" : {
+        "structurizr.dsl.identifier" : "ipr_chain"
+      },
+      "relationships" : [ {
+        "description" : "On-chain records",
+        "destinationId" : "16",
+        "id" : "42",
+        "linkedRelationshipId" : "40",
+        "sourceId" : "5"
+      }, {
+        "description" : "Price Data",
+        "destinationId" : "17",
+        "id" : "45",
+        "linkedRelationshipId" : "43",
+        "sourceId" : "5"
+      }, {
+        "description" : "Collateral Management",
+        "destinationId" : "18",
+        "id" : "48",
+        "linkedRelationshipId" : "46",
+        "sourceId" : "5"
+      }, {
+        "description" : "Wallet Auth",
+        "destinationId" : "19",
+        "id" : "51",
+        "linkedRelationshipId" : "49",
+        "sourceId" : "5"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Blockchain infrastructure",
+      "documentation" : { },
+      "id" : "16",
+      "location" : "Unspecified",
+      "name" : "Solana Network",
+      "properties" : {
+        "structurizr.dsl.identifier" : "solana_network"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Price feeds",
+      "documentation" : { },
+      "id" : "17",
+      "location" : "Unspecified",
+      "name" : "Pyth Oracle",
+      "properties" : {
+        "structurizr.dsl.identifier" : "oracle"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "DeFi Lending",
+      "documentation" : { },
+      "id" : "18",
+      "location" : "Unspecified",
+      "name" : "MarginFi",
+      "properties" : {
+        "structurizr.dsl.identifier" : "lending"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Digital Wallet",
+      "documentation" : { },
+      "id" : "19",
+      "location" : "Unspecified",
+      "name" : "User Wallet",
+      "properties" : {
+        "structurizr.dsl.identifier" : "wallet"
+      },
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "IPRChain",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlICJJUFJDaGFpbiIgIkRlY2VudHJhbGl6ZWQgSVAgUmVnaXN0cnkgYW5kIE93bmVyc2hpcCBNYW5hZ2VtZW50IiB7CgogICAgIWlkZW50aWZpZXJzIGhpZXJhcmNoaWNhbAoKICAgIG1vZGVsIHsKICAgICAgICAjPT09PT09PT09PT0gQWN0b3JzID09PT09PT09PT09PSMKICAgICAgICBjcmVhdG9yID0gcGVyc29uICJDcmVhdG9yIiAiQXJ0aXN0cyAvIERlc2lnbmVycyAvIERldmVsb3BlcnMgcmVnaXN0ZXJpbmcgSVAiCiAgICAgICAgc3RhcnR1cCA9IHBlcnNvbiAiU3RhcnR1cCIgIkJ1c2luZXNzZXMgbWFuYWdpbmcgSVAgUG9ydGZvbGlvIgogICAgICAgIGxhd3llciA9IHBlcnNvbiAiTGF3eWVyIiAiVmFsaWRhdGVzIGxlZ2FsIG93bmVyc2hpcCIKICAgICAgICBidXllciA9IHBlcnNvbiAiQnV5ZXIiICJEaXNjb3ZlcnMgLyBBY3F1aXJlcyBJUCIKCiAgICAgICAgIz09PT09PT09PT09IFNvZnR3YXJlIFN5c3RlbXMgPT09PT09PT09PT09IwogICAgICAgIGlwcl9jaGFpbiA9IHNvZnR3YXJlU3lzdGVtICJJUFJDaGFpbiIgIkRlY2VudHJhbGl6ZWQgSVAgUmVnaXN0cnkgYW5kIE93bmVyc2hpcCBNYW5hZ2VtZW50IiB7CiAgICAgICAgICAgIGZyb250ZW5kID0gY29udGFpbmVyICJGcm9udGVuZCBBcHBsaWNhdGlvbiIgewogICAgICAgICAgICAgIHJlZ2lzdHJhdGlvbiA9IGNvbXBvbmVudCAiUmVnaXN0cmF0aW9uIC8gTG9naW4iICJSZWdpc3RlcnMgLyBVcGxvYWRzIElQIiB7CiAgICAgICAgICAgICAgICAgIHRhZ3MgIkZyb250ZW5kIgogICAgICAgICAgICAgIH0gCiAgICAgICAgICAgICAgZGFzaGJvYXJkID0gY29tcG9uZW50ICJEYXNoYm9hcmQgVUkiICJBbmFseXRpY3MgLyBNYW5hZ2VtZW50IiB7IAogICAgICAgICAgICAgICAgICB0YWdzICJGcm9udGVuZCIgCiAgICAgICAgICAgICAgfQogICAgICAgICAgICAgIG1hcmtldHBsYWNlID0gY29tcG9uZW50ICJNYXJrZXRwbGFjZSIgIklQIGRpc2NvdmVyeSBwb3J0YWwiIHsKICAgICAgICAgICAgICAgICAgdGFncyAiRnJvbnRlbmQiCiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICAgIGJhY2tlbmQgPSBjb250YWluZXIgIkJhY2tlbmQgU2VydmljZSIgIk5vZGUuanMgQVBJIgogICAgICAgICAgICBzb2xhbmFfcHJvZ3JhbSA9IGNvbnRhaW5lciAiU29sYW5hIFByb2dyYW0iICJTbWFydCBDb250cmFjdHMgLyBPbi1jaGFpbiBsb2dpYyIgewogICAgICAgICAgICAgICAgbWludF9wcm9ncmFtID0gY29tcG9uZW50ICJNaW50IFByb2dyYW0iICJTUEwgVG9rZW4gQ3JlYXRpb24iIAogICAgICAgICAgICAgICAgbGljZW5zZV9wcm9ncmFtID0gY29tcG9uZW50ICJMaWNlbnNlIFByb2dyYW0iICJSb3lhbHR5IE1hbmFnZW1lbnQiCiAgICAgICAgICAgICAgICBkYW9fcHJvZ3JhbSA9IGNvbXBvbmVudCAiREFPIFByb2dyYW0iICJEaXNwdXRlIFJlc29sdXRpb24iCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIHN0b3JhZ2UgPSBjb250YWluZXIgIlN0b3JhZ2UiICJEZWNlbnRyYWxpemVkIFN0b3JhZ2UiIHsKICAgICAgICAgICAgICAgIHRhZ3MgIlN0b3JhZ2UiCiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAgIHNvbGFuYV9uZXR3b3JrID0gc29mdHdhcmVTeXN0ZW0gIlNvbGFuYSBOZXR3b3JrIiAiQmxvY2tjaGFpbiBpbmZyYXN0cnVjdHVyZSIKICAgICAgICBvcmFjbGUgPSBzb2Z0d2FyZVN5c3RlbSAiUHl0aCBPcmFjbGUiICJQcmljZSBmZWVkcyIKICAgICAgICBsZW5kaW5nID0gc29mdHdhcmVTeXN0ZW0gIk1hcmdpbkZpIiAiRGVGaSBMZW5kaW5nIgogICAgICAgIHdhbGxldCA9IHNvZnR3YXJlU3lzdGVtICJVc2VyIFdhbGxldCIgIkRpZ2l0YWwgV2FsbGV0IgoKICAgICAgICAjPT09PT09PT09PT0gUmVsYXRpb25zaGlwcyA9PT09PT09PT09PT0jCiAgICAgICAgY3JlYXRvciAtPiBpcHJfY2hhaW4uZnJvbnRlbmQucmVnaXN0cmF0aW9uICJSZWdpc3RlcnMgLyBNaW50cyBJUCIgICAgCiAgICAgICAgc3RhcnR1cCAtPiBpcHJfY2hhaW4uZnJvbnRlbmQucmVnaXN0cmF0aW9uICJCdWxrIHJlZ2lzdHJhdGlvbnMiCiAgICAgICAgbGF3eWVyIC0+IGlwcl9jaGFpbi5mcm9udGVuZC5kYXNoYm9hcmQgIlZhbGlkYXRlcyBvd25lcnNoaXAiICAgIAogICAgICAgIGJ1eWVyIC0+IGlwcl9jaGFpbi5mcm9udGVuZC5tYXJrZXRwbGFjZSAiRGlzY292ZXJzIC8gQWNxdWlyZXMgSVAiICAgIAogICAgICAgIAogICAgICAgIGlwcl9jaGFpbi5mcm9udGVuZC5yZWdpc3RyYXRpb24gLT4gaXByX2NoYWluLmJhY2tlbmQgIlN1Ym1pdHMgbWV0YWRhdGEiCiAgICAgICAgaXByX2NoYWluLmZyb250ZW5kLmRhc2hib2FyZCAtPiBpcHJfY2hhaW4uYmFja2VuZCAiU2VuZHMgQVBJIHJlcXVlc3QiCiAgICAgICAgaXByX2NoYWluLmZyb250ZW5kLm1hcmtldHBsYWNlIC0+IGlwcl9jaGFpbi5iYWNrZW5kICJJbml0aWF0ZXMgbGljZW5zZSIKCiAgICAgICAgaXByX2NoYWluLmJhY2tlbmQgLT4gaXByX2NoYWluLnN0b3JhZ2UgIlJlYWRzIGZyb20gYW5kIHdyaXRlcyB0byIKICAgICAgICBpcHJfY2hhaW4uYmFja2VuZCAtPiBpcHJfY2hhaW4uc29sYW5hX3Byb2dyYW0ubWludF9wcm9ncmFtICJNaW50cyBTUEwgVG9rZW4iCiAgICAgICAgaXByX2NoYWluLmJhY2tlbmQgLT4gaXByX2NoYWluLnNvbGFuYV9wcm9ncmFtLmxpY2Vuc2VfcHJvZ3JhbSAiU2V0IFJveWFsdHkiCgogICAgICAgIGlwcl9jaGFpbi5zb2xhbmFfcHJvZ3JhbS5taW50X3Byb2dyYW0gLT4gc29sYW5hX25ldHdvcmsgIk9uLWNoYWluIHJlY29yZHMiCiAgICAgICAgaXByX2NoYWluLnNvbGFuYV9wcm9ncmFtLmxpY2Vuc2VfcHJvZ3JhbSAtPiBvcmFjbGUgIlByaWNlIERhdGEiCiAgICAgICAgaXByX2NoYWluLnNvbGFuYV9wcm9ncmFtLmRhb19wcm9ncmFtIC0+IGxlbmRpbmcgIkNvbGxhdGVyYWwgTWFuYWdlbWVudCIKICAgICAgICBpcHJfY2hhaW4uc29sYW5hX3Byb2dyYW0uZGFvX3Byb2dyYW0gLT4gd2FsbGV0ICJXYWxsZXQgQXV0aCIKICAgIH0KCiAgICB2aWV3cyB7CiAgICAgICAgc3lzdGVtQ29udGV4dCBpcHJfY2hhaW4gIkRpYWdyYW0xIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvbGF5b3V0IHRiCiAgICAgICAgfQoKICAgICAgICBjb250YWluZXIgaXByX2NoYWluICJEaWFncmFtMiIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b2xheW91dCB0YgogICAgICAgIH0KCiAgICAgICAgY29tcG9uZW50IGlwcl9jaGFpbi5mcm9udGVuZCAiRGlhZ3JhbTMiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9sYXlvdXQgdGIKICAgICAgICB9CgogICAgICAgIGNvbXBvbmVudCBpcHJfY2hhaW4uc29sYW5hX3Byb2dyYW0gIkRpYWdyYW00IiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvbGF5b3V0IHRiCiAgICAgICAgfQoKICAgICAgICBzdHlsZXMgewogICAgICAgICAgICBlbGVtZW50ICJFbGVtZW50IiB7CiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgICAgICBzdHJva2UgI2VlZWVlZQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIlBlcnNvbiIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCBTZWFHcmVlbgogICAgICAgICAgICAgICAgc2hhcGUgcGVyc29uCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiU29mdHdhcmUgU3lzdGVtIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMyMjhiZTYKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJDb250YWluZXIiIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgb2xpdmUgCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiQ29tcG9uZW50IiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kIHNsYXRlYmx1ZQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIlN0b3JhZ2UiIHsKICAgICAgICAgICAgICAgIHNoYXBlIGN5bGluZGVyCiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9CgogICAgY29uZmlndXJhdGlvbiB7CiAgICAgICAgc2NvcGUgc29mdHdhcmVzeXN0ZW0KICAgIH0KCn0="
+  },
+  "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "containerId" : "6",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "10",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "Diagram3",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "20"
+      }, {
+        "id" : "23"
+      }, {
+        "id" : "26"
+      }, {
+        "id" : "29"
+      }, {
+        "id" : "32"
+      }, {
+        "id" : "34"
+      }, {
+        "id" : "35"
+      } ]
+    }, {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "containerId" : "11",
+      "dimensions" : {
+        "height" : 1900,
+        "width" : 3120
+      },
+      "elements" : [ {
+        "id" : "10",
+        "x" : 595,
+        "y" : 165
+      }, {
+        "id" : "12",
+        "x" : 220,
+        "y" : 765
+      }, {
+        "id" : "13",
+        "x" : 970,
+        "y" : 765
+      }, {
+        "id" : "14",
+        "x" : 1720,
+        "y" : 765
+      }, {
+        "id" : "16",
+        "x" : 220,
+        "y" : 1365
+      }, {
+        "id" : "17",
+        "x" : 970,
+        "y" : 1365
+      }, {
+        "id" : "18",
+        "x" : 1720,
+        "y" : 1365
+      }, {
+        "id" : "19",
+        "x" : 2470,
+        "y" : 1365
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "Diagram4",
+      "order" : 4,
+      "relationships" : [ {
+        "id" : "37"
+      }, {
+        "id" : "39"
+      }, {
+        "id" : "40"
+      }, {
+        "id" : "43"
+      }, {
+        "id" : "46"
+      }, {
+        "id" : "49"
+      } ]
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "Diagram4",
+      "metadataSymbols" : "SquareBrackets",
+      "styles" : {
+        "elements" : [ {
+          "color" : "#ffffff",
+          "stroke" : "#eeeeee",
+          "tag" : "Element"
+        }, {
+          "background" : "#2e8b57",
+          "shape" : "Person",
+          "tag" : "Person"
+        }, {
+          "background" : "#228be6",
+          "tag" : "Software System"
+        }, {
+          "background" : "#808000",
+          "tag" : "Container"
+        }, {
+          "background" : "#6a5acd",
+          "tag" : "Component"
+        }, {
+          "shape" : "Cylinder",
+          "tag" : "Storage"
+        } ]
+      },
+      "terminology" : { }
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 3200,
+        "width" : 3375
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 675,
+        "y" : 165
+      }, {
+        "id" : "2",
+        "x" : 1375,
+        "y" : 165
+      }, {
+        "id" : "3",
+        "x" : 2075,
+        "y" : 165
+      }, {
+        "id" : "4",
+        "x" : 2775,
+        "y" : 165
+      }, {
+        "id" : "6",
+        "x" : 1700,
+        "y" : 865
+      }, {
+        "id" : "10",
+        "x" : 1700,
+        "y" : 1465
+      }, {
+        "id" : "11",
+        "x" : 1325,
+        "y" : 2065
+      }, {
+        "id" : "15",
+        "x" : 2075,
+        "y" : 2065
+      }, {
+        "id" : "16",
+        "x" : 200,
+        "y" : 2665
+      }, {
+        "id" : "17",
+        "x" : 950,
+        "y" : 2665
+      }, {
+        "id" : "18",
+        "x" : 1700,
+        "y" : 2665
+      }, {
+        "id" : "19",
+        "x" : 2450,
+        "y" : 2665
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "Diagram2",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "21"
+      }, {
+        "id" : "24"
+      }, {
+        "id" : "27"
+      }, {
+        "id" : "30"
+      }, {
+        "id" : "33"
+      }, {
+        "id" : "36"
+      }, {
+        "id" : "38"
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "47"
+      }, {
+        "id" : "50",
+        "vertices" : [ {
+          "x" : 1925,
+          "y" : 2469
+        } ]
+      } ],
+      "softwareSystemId" : "5"
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "17",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "18",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "19",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "Diagram1",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "22"
+      }, {
+        "id" : "25"
+      }, {
+        "id" : "28"
+      }, {
+        "id" : "31"
+      }, {
+        "id" : "42"
+      }, {
+        "id" : "45"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "51"
+      } ],
+      "softwareSystemId" : "5"
+    } ]
+  }
+}
