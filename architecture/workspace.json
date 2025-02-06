@@ -6,7 +6,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-02-05T22:24:10Z",
+  "lastModifiedDate" : "2025-02-05T23:13:54Z",
   "model" : {
     "people" : [ {
       "description" : "Artists / Designers / Developers registering IP",
@@ -402,7 +402,7 @@
   "views" : {
     "componentViews" : [ {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -411,38 +411,42 @@
         "vertices" : false
       },
       "containerId" : "6",
+      "dimensions" : {
+        "height" : 2000,
+        "width" : 3020
+      },
       "elements" : [ {
         "id" : "1",
-        "x" : 0,
-        "y" : 0
+        "x" : 200,
+        "y" : 165
       }, {
         "id" : "2",
-        "x" : 0,
-        "y" : 0
+        "x" : 900,
+        "y" : 165
       }, {
         "id" : "3",
-        "x" : 0,
-        "y" : 0
+        "x" : 1625,
+        "y" : 165
       }, {
         "id" : "4",
-        "x" : 0,
-        "y" : 0
+        "x" : 2375,
+        "y" : 165
       }, {
         "id" : "7",
-        "x" : 0,
-        "y" : 0
+        "x" : 850,
+        "y" : 865
       }, {
         "id" : "8",
-        "x" : 0,
-        "y" : 0
+        "x" : 1600,
+        "y" : 865
       }, {
         "id" : "9",
-        "x" : 0,
-        "y" : 0
+        "x" : 2350,
+        "y" : 865
       }, {
         "id" : "10",
-        "x" : 0,
-        "y" : 0
+        "x" : 1600,
+        "y" : 1465
       } ],
       "externalContainerBoundariesVisible" : false,
       "key" : "Diagram3",
@@ -572,51 +576,51 @@
       },
       "elements" : [ {
         "id" : "1",
-        "x" : 675,
+        "x" : 674,
         "y" : 165
       }, {
         "id" : "2",
-        "x" : 1375,
+        "x" : 1374,
         "y" : 165
       }, {
         "id" : "3",
-        "x" : 2075,
+        "x" : 2074,
         "y" : 165
       }, {
         "id" : "4",
-        "x" : 2775,
+        "x" : 2774,
         "y" : 165
       }, {
         "id" : "6",
-        "x" : 1700,
+        "x" : 1699,
         "y" : 865
       }, {
         "id" : "10",
-        "x" : 1700,
+        "x" : 1699,
         "y" : 1465
       }, {
         "id" : "11",
-        "x" : 1325,
+        "x" : 1324,
         "y" : 2065
       }, {
         "id" : "15",
-        "x" : 2075,
+        "x" : 2074,
         "y" : 2065
       }, {
         "id" : "16",
-        "x" : 200,
+        "x" : 199,
         "y" : 2665
       }, {
         "id" : "17",
-        "x" : 950,
+        "x" : 949,
         "y" : 2665
       }, {
         "id" : "18",
-        "x" : 1700,
+        "x" : 1699,
         "y" : 2665
       }, {
         "id" : "19",
-        "x" : 2450,
+        "x" : 2449,
         "y" : 2665
       } ],
       "externalSoftwareSystemBoundariesVisible" : false,
@@ -645,7 +649,7 @@
       }, {
         "id" : "50",
         "vertices" : [ {
-          "x" : 1925,
+          "x" : 1924,
           "y" : 2469
         } ]
       } ],
@@ -653,7 +657,7 @@
     } ],
     "systemContextViews" : [ {
       "automaticLayout" : {
-        "applied" : false,
+        "applied" : true,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -661,42 +665,46 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
+      "dimensions" : {
+        "height" : 2000,
+        "width" : 3100
+      },
       "elements" : [ {
         "id" : "1",
-        "x" : 0,
-        "y" : 0
+        "x" : 299,
+        "y" : 165
       }, {
         "id" : "2",
-        "x" : 0,
-        "y" : 0
+        "x" : 999,
+        "y" : 165
       }, {
         "id" : "3",
-        "x" : 0,
-        "y" : 0
+        "x" : 1699,
+        "y" : 165
       }, {
         "id" : "4",
-        "x" : 0,
-        "y" : 0
+        "x" : 2399,
+        "y" : 165
       }, {
         "id" : "5",
-        "x" : 0,
-        "y" : 0
+        "x" : 1324,
+        "y" : 865
       }, {
         "id" : "16",
-        "x" : 0,
-        "y" : 0
+        "x" : 199,
+        "y" : 1465
       }, {
         "id" : "17",
-        "x" : 0,
-        "y" : 0
+        "x" : 949,
+        "y" : 1465
       }, {
         "id" : "18",
-        "x" : 0,
-        "y" : 0
+        "x" : 1699,
+        "y" : 1465
       }, {
         "id" : "19",
-        "x" : 0,
-        "y" : 0
+        "x" : 2449,
+        "y" : 1465
       } ],
       "enterpriseBoundaryVisible" : true,
       "key" : "Diagram1",
