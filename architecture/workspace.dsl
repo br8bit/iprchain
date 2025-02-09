@@ -90,13 +90,13 @@ workspace "IPRChain" "Decentralized IP Registry and Ownership Management" {
                 shape person
             }
             element "Software System" {
-                background #228be6
+                background indigo
             }
             element "Container" {
                 background olive 
             }
             element "Component" {
-                background slateblue
+                background orangered
             }
             element "Storage" {
                 shape cylinder
