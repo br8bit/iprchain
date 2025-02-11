@@ -13,9 +13,16 @@ The platform simplifies the intellectual property registration process, making i
 **Core Components:**
 
 1. **IP Registry**
-    - The creator registers an IP on the Protocol, which generates a unique IP ID and stores metadata on-chain.
+    - Creator registers an IP, the protocol generates a unique identifier (IP ID).
+    - This identifier is stored in the IP Registry (a PDA).
+    - Metadata (title, creator, description, rights, etc.) is hashed and stored on-chain, while the full content can be stored off-chain (e.g., IPFS, Arweave).
+    - The registered IP is linked to NFTs to represent verifiable ownership.
 2. **Licensing**
     - The creator defines licensing terms (usage rights, royalty rules).
+    - These licenses define:
+        - Who can use the IP (public, private, specific entities)
+        - How it can be used (commercial vs. non-commercial)
+        - Revenue-sharing terms (percentage of royalties, upfront fees, etc.)
     - Other users discover the IP according to the set terms.
     - A licensee accepts the license and pays the required fees.
     - The protocol grants access to the IP.
