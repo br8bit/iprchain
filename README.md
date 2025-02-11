@@ -1,10 +1,37 @@
 # IPRChain - Onchain Intellectual Property Registry
 
-IPRChain is a decentralized platform on the Solana blockchain designed to enable individuals and organizations to securely register and verify ownership of their intellectual property and copyrights. By utilizing blockchain’s immutability and transparency, IPRChain ensures that all processes are permanently recorded on-chain, providing indisputable proof of ownership. The platform simplifies the intellectual property registration process, making it accessible globally and eliminating the reliance on traditional centralized organizations. Users will receive digital proof of their ownership, enhancing trust and reducing disputes in intellectual property claims.
+IPRChain is a decentralized platform on the Solana blockchain designed to enable individuals and organizations to securely register and verify ownership of their intellectual property and copyrights.
 
-## Archtecture of IPRChain
+By utilizing blockchain’s immutability and transparency, IPRChain ensures that all processes are permanently recorded on-chain, providing indisputable proof of ownership.
+
+The platform simplifies the intellectual property registration process, making it accessible globally and eliminating the reliance on traditional centralized organizations. Users will receive digital proof of their ownership, enhancing trust and reducing disputes in intellectual property claims.
+
+## Architecture
 
 <!--# ![](architecture.png)-->
+
+**Core Components:**
+
+    1. IP Registry
+        - The on-chain ledger where original works are recorded.
+        - Stores metadata, creator attribution, and licensing details.
+    2. Smart Contract-Based Licensing
+        - Enables automated enforcement of IP rights and licensing agreements.
+        - Ensures compliance with creator-defined conditions.
+    3. Derivative Tracking System
+        - Keeps a transparent history of all derivative works.
+        - Ensures proper attribution and revenue distribution.
+    4. Economic & Incentive Layer
+        - Uses token-based incentives to reward creators and contributors.
+        - Supports royalty distribution via smart contracts.
+
+**How it Works:**
+
+    - A creator registers an IP asset on the protocol.
+    - The system generates a unique on-chain record.
+    - The creator sets licensing terms using smart contracts.
+    - Other users discover and license the IP according to the set terms.
+    - Royalties and revenue flow automatically to the appropriate parties.
 
 ### Sequence Diagram
 
