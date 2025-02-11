@@ -12,26 +12,21 @@ The platform simplifies the intellectual property registration process, making i
 
 **Core Components:**
 
-    1. IP Registry
-        - The on-chain ledger where original works are recorded.
-        - Stores metadata, creator attribution, and licensing details.
-    2. Smart Contract-Based Licensing
-        - Enables automated enforcement of IP rights and licensing agreements.
-        - Ensures compliance with creator-defined conditions.
-    3. Derivative Tracking System
-        - Keeps a transparent history of all derivative works.
-        - Ensures proper attribution and revenue distribution.
-    4. Economic & Incentive Layer
-        - Uses token-based incentives to reward creators and contributors.
-        - Supports royalty distribution via smart contracts.
-
-**How it Works:**
-
-    - A creator registers an IP asset on the protocol.
-    - The system generates a unique on-chain record.
-    - The creator sets licensing terms using smart contracts.
-    - Other users discover and license the IP according to the set terms.
-    - Royalties and revenue flow automatically to the appropriate parties.
+1. IP Registry
+    - The creator registers an IP on the Protocol, which generates a unique IP ID and stores metadata on-chain.
+2. Licensing
+    - The creator defines licensing terms (usage rights, royalty rules).
+    - Other users discover the IP according to the set terms.
+    - A licensee accepts the license and pays the required fees.
+    - The protocol grants access to the IP.
+3. Derivative Tracking System (out of scope)
+    - A licensee creates a derivative work, registering it on the protocol.
+    - A new IP ID is generated but remains linked to the original work for attribution.
+4. Economic & Incentive Layer
+    - The derivative work is listed on a marketplace for sale.
+    - The marketplace reports sales to the protocol.
+    - The protocol’s revenue system calculates royalty splits.
+    - Funds are automatically distributed to the original creator and new contributor(s).
 
 ### Sequence Diagram
 
