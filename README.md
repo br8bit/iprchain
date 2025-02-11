@@ -12,17 +12,17 @@ The platform simplifies the intellectual property registration process, making i
 
 **Core Components:**
 
-1. IP Registry
+1. **IP Registry**
     - The creator registers an IP on the Protocol, which generates a unique IP ID and stores metadata on-chain.
-2. Licensing
+2. **Licensing**
     - The creator defines licensing terms (usage rights, royalty rules).
     - Other users discover the IP according to the set terms.
     - A licensee accepts the license and pays the required fees.
     - The protocol grants access to the IP.
-3. Derivative Tracking System (out of scope)
+3. **Derivative Tracking System (out of scope)**
     - A licensee creates a derivative work, registering it on the protocol.
     - A new IP ID is generated but remains linked to the original work for attribution.
-4. Economic & Incentive Layer
+4. **Economic & Incentive Layer**
     - The derivative work is listed on a marketplace for sale.
     - The marketplace reports sales to the protocol.
     - The protocol’s revenue system calculates royalty splits.
