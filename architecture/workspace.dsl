@@ -12,7 +12,7 @@ workspace "IPRChain" "Decentralized IP Registry and Ownership Management" {
         #=========== Software Systems ============#
         ipr_chain = softwareSystem "IPRChain" "Decentralized IP Registry and Ownership Management" {
             frontend = container "Frontend Application" {
-              registration = component "Registration / Login" "Registers / Uploads IP" {
+              registration = component "Registry UI" "Registers / Uploads IP" {
                   tags "Frontend"
               } 
               dashboard = component "Dashboard UI" "Analytics / Management" { 
@@ -35,7 +35,9 @@ workspace "IPRChain" "Decentralized IP Registry and Ownership Management" {
         }
 
         solana_network = softwareSystem "Solana Network" "Blockchain infrastructure"
-        oracle = softwareSystem "Pyth Oracle" "Price feeds"
+        oracle = softwareSystem "Pyth Oracle" "Price feeds" {
+            tags "Oracle"
+        }
         lending = softwareSystem "MarginFi" "DeFi Lending"
         wallet = softwareSystem "User Wallet" "Digital Wallet"
 
@@ -100,6 +102,9 @@ workspace "IPRChain" "Decentralized IP Registry and Ownership Management" {
             }
             element "Storage" {
                 shape cylinder
+            }
+            element "Oracle" {
+                shape hexagon
             }
         }
     }
