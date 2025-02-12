@@ -50,7 +50,7 @@ class IpAccount {
 class LicenseAccount {
     ip_account: Pubkey,
     licensee: Pubkey,
-    terms: LicenseTerms,
+    terms: Pubkey,
     status: LicenseStatus,
     total_royalties_paid: u64,
     last_payment_date: i64,
@@ -99,7 +99,7 @@ class RoyaltyRecipient {
 
 %% -- Relationships --
 IpAccount --> Arweave : "metadata_uri points\nto off-chain JSON"
-IpAccount --> MetaplexTokenMetadata : "uses mint address\nfor ownership via NFT" 
+IpAccount --> MetaplexTokenMetadata : "uses mint address\nfor ownership via NFT"
 LicenseAccount --> IpAccount : "references\nlicensed IP"
 LicenseAccount --> LicenseTerms : "contains"
 LicenseAccount --> LicenseStatus : "tracks"
