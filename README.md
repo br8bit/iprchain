@@ -80,7 +80,6 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-    participant Creator
     participant Startup
     participant Frontend as React Frontend
     participant Backend as Node.js Backend
