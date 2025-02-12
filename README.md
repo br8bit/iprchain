@@ -43,15 +43,17 @@ class IpAccount {
     owner: Pubkey
     mint: Pubkey
     ip_hash: [u8; 32]
-    registration_date: i64
     metadata_uri: String
+    created_at: i64
 }
 
 class LicenseAccount {
-    ip_account: Pubkey
-    licensee: Pubkey
-    terms: LicenseTerms
-    status: LicenseStatus
+    ip_account: Pubkey,
+    licensee: Pubkey,
+    terms: LicenseTerms,
+    status: LicenseStatus,
+    total_royalties_paid: u64,
+    last_payment_date: i64,
 }
 
 %% -- Supporting Structs/Enums --
@@ -80,14 +82,30 @@ class Arweave {
     json_uri: String
 }
 
+%% -- Royalty Configuration --
+class RoyaltyConfig {
+    royalty_basis_points: u16
+    royalty_share: Pubkey
+    recipients: Vec < RoyaltyRecipient >
+    %% Metaplex-standard royalty structure
+}
+
+class RoyaltyRecipient {
+    address: Pubkey,
+    share: u8, // Percentage share (sum to 100)
+}
+
 
 %% -- Relationships --
-IpAccount --> MetaplexTokenMetadata : "uses mint address\nfor ownership via NFT" 
 IpAccount --> Arweave : "metadata_uri points\nto off-chain JSON"
+IpAccount --> MetaplexTokenMetadata : "uses mint address\nfor ownership via NFT" 
 LicenseAccount --> IpAccount : "references\nlicensed IP"
 LicenseAccount --> LicenseTerms : "contains"
 LicenseAccount --> LicenseStatus : "tracks"
 LicenseTerms --> MetaplexTokenMetadata : "royalties enforced\nvia Metaplex standard"
+LicenseTerms --> RoyaltyConfig : "converted to\nbasis points (1% = 100)"
+MetaplexTokenMetadata --> RoyaltyConfig : "stores"
+RoyaltyConfig --> RoyaltyRecipient: "stores"
 ```
 
 ## Sequence Diagrams
