@@ -61,6 +61,7 @@ class LicenseTerms {
     fee: u64
     expiration: i64
     royalty_percent: u8
+    commercial: bool
 }
 
 class LicenseStatus {
