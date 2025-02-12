@@ -33,7 +33,7 @@ The platform simplifies the intellectual property registration process, making i
    - The protocol’s revenue system calculates royalty splits.
    - Funds are automatically distributed to the original creator and new contributor(s).
 
-### Accounts
+## Accounts
 
 ```mermaid
 classDiagram
@@ -90,9 +90,9 @@ LicenseAccount --> LicenseStatus : "tracks"
 LicenseTerms --> MetaplexTokenMetadata : "royalties enforced\nvia Metaplex standard"
 ```
 
-### Sequence Diagrams
+## Sequence Diagrams
 
-#### Creator
+### Creator
 
 ```mermaid
 sequenceDiagram
@@ -131,7 +131,7 @@ sequenceDiagram
     deactivate Frontend
 ```
 
-#### Startup
+### Startup
 
 ```mermaid
 sequenceDiagram
@@ -154,7 +154,7 @@ sequenceDiagram
     deactivate Frontend
 ```
 
-#### Laywer
+### Laywer
 
 ```mermaid
 sequenceDiagram
