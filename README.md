@@ -8,8 +8,6 @@ The platform simplifies the intellectual property registration process, making i
 
 ## Architecture
 
-<!--# ![](architecture.png)-->
-
 ### Core Components
 
 1. **IP Registry**
@@ -34,6 +32,63 @@ The platform simplifies the intellectual property registration process, making i
    - The marketplace reports sales to the protocol.
    - The protocol’s revenue system calculates royalty splits.
    - Funds are automatically distributed to the original creator and new contributor(s).
+
+### Accounts
+
+```mermaid
+classDiagram
+
+%% -- Core Accounts --
+class IpAccount {
+    owner: Pubkey
+    mint: Pubkey
+    ip_hash: [u8; 32]
+    registration_date: i64
+    metadata_uri: String
+}
+
+class LicenseAccount {
+    ip_account: Pubkey
+    licensee: Pubkey
+    terms: LicenseTerms
+    status: LicenseStatus
+}
+
+%% -- Supporting Structs/Enums --
+class LicenseTerms {
+    fee: u64
+    expiration: i64
+    royalty_percent: u8
+}
+
+class LicenseStatus {
+    <<enumeration>>
+    Active
+    Revoked
+    Expired
+}
+
+%% -- External Connections --
+class MetaplexTokenMetadata {
+    mint: Pubkey
+    uri: String
+    royalties: RoyaltyConfig
+}
+
+class Arweave {
+    content_hash: String
+    json_uri: String
+}
+
+
+%% -- Relationships --
+IpAccount --> MetaplexTokenMetadata : "uses mint address\nfor ownership via NFT" 
+IpAccount --> Arweave : "metadata_uri points\nto off-chain JSON"
+LicenseAccount --> IpAccount : "references\nlicensed IP"
+LicenseAccount --> LicenseTerms : "contains"
+LicenseAccount --> LicenseStatus : "tracks"
+LicenseTerms --> MetaplexTokenMetadata : "royalties enforced\nvia Metaplex standard"
+```
 
 ### Sequence Diagrams
 
