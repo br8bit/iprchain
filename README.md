@@ -24,7 +24,7 @@ The platform simplifies the intellectual property registration process, making i
    - Other users discover the IP according to the set terms.
    - A licensee accepts the license and pays the required fees.
    - The protocol grants access to the IP.
-3. **Derivative Tracking System (out of scope)**
+3. **Derivative Tracking System**
    - A licensee creates a derivative work, registering it on the protocol.
    - A new IP ID is generated but remains linked to the original work for attribution.
 4. **Economic & Incentive Layer**
