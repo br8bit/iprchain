@@ -6,7 +6,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-02-11T08:45:29Z",
+  "lastModifiedDate" : "2025-02-11T15:46:26Z",
   "model" : {
     "people" : [ {
       "description" : "Artists / Designers / Developers registering IP",
@@ -417,35 +417,35 @@
       },
       "elements" : [ {
         "id" : "1",
-        "x" : 200,
+        "x" : 199,
         "y" : 165
       }, {
         "id" : "2",
-        "x" : 900,
+        "x" : 899,
         "y" : 165
       }, {
         "id" : "3",
-        "x" : 1625,
+        "x" : 1624,
         "y" : 165
       }, {
         "id" : "4",
-        "x" : 2375,
+        "x" : 2374,
         "y" : 165
       }, {
         "id" : "7",
-        "x" : 850,
+        "x" : 849,
         "y" : 865
       }, {
         "id" : "8",
-        "x" : 1600,
+        "x" : 1599,
         "y" : 865
       }, {
         "id" : "9",
-        "x" : 2350,
+        "x" : 2349,
         "y" : 865
       }, {
         "id" : "10",
-        "x" : 1600,
+        "x" : 1599,
         "y" : 1465
       } ],
       "externalContainerBoundariesVisible" : false,
@@ -483,35 +483,35 @@
       },
       "elements" : [ {
         "id" : "10",
-        "x" : 595,
+        "x" : 594,
         "y" : 165
       }, {
         "id" : "12",
-        "x" : 220,
+        "x" : 219,
         "y" : 765
       }, {
         "id" : "13",
-        "x" : 970,
+        "x" : 969,
         "y" : 765
       }, {
         "id" : "14",
-        "x" : 1720,
+        "x" : 1719,
         "y" : 765
       }, {
         "id" : "16",
-        "x" : 220,
+        "x" : 219,
         "y" : 1365
       }, {
         "id" : "17",
-        "x" : 970,
+        "x" : 969,
         "y" : 1365
       }, {
         "id" : "18",
-        "x" : 1720,
+        "x" : 1719,
         "y" : 1365
       }, {
         "id" : "19",
-        "x" : 2470,
+        "x" : 2469,
         "y" : 1365
       } ],
       "externalContainerBoundariesVisible" : false,
