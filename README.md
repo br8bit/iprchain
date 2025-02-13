@@ -50,7 +50,7 @@ class IpAccount {
 class LicenseAccount {
     ip_account: Pubkey,
     licensee: Pubkey,
-    terms: Pubkey,
+    terms: LicenseTerms,
     status: LicenseStatus,
     total_royalties_paid: u64,
     last_payment_date: i64,
