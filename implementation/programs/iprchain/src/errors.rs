@@ -20,4 +20,12 @@ pub enum ErrorCode {
     LicenseeMismatch,
     #[msg("Royalty distribution failed")]
     RoyaltyDistributionFailed,
+    #[msg("Invalid royalty percent")]
+    InvalidRoyaltyPercent,
+    #[msg("Invalid fee")]
+    InvalidFee,
+    #[msg("Invalid license terms")]
+    InvalidLicenseTerms,
+    #[msg("Invalid license status")]
+    InvalidLicenseStatus,
 }
