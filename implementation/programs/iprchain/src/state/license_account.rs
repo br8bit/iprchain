@@ -13,5 +13,5 @@ pub struct LicenseAccount {
 }
 
 impl LicenseAccount {
-    pub const LEN: usize = 32 + 32 + LicenseTerms::LEN + 1 + 8;
+    pub const LEN: usize = 8 + 32 + 32 + LicenseTerms::LEN + 1 + 8 + 8;
 }
