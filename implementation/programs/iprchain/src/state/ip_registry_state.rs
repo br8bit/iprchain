@@ -7,4 +7,5 @@ pub struct IPRegistryState {
     pub fee: u64,
     pub bump: u8,
     pub treasury_bump: u8,
+    pub total_ips: u64,
 }
