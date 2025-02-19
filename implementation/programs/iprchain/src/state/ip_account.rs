@@ -3,9 +3,9 @@ use anchor_spl::metadata::mpl_token_metadata::MAX_URI_LENGTH;
 
 #[account]
 pub struct IPAccount {
-    pub creator: Pubkey,   // Current owner (NFT holder)
-    pub mint: Pubkey,      // NFT mint address
-    pub ip_hash: [u8; 32], // SHA-256 of IP content
+    pub creator: Pubkey,    // Creator wallet
+    pub core_asset: Pubkey, // MPL Core NFT address
+    pub ip_hash: [u8; 32],  // SHA-256 of IP content
     pub bump: u8,
     pub created_at: i64,
     pub metadata_uri: String, // Arweave/IPFS URI
