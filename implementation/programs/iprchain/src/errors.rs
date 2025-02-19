@@ -28,4 +28,12 @@ pub enum ErrorCode {
     InvalidLicenseTerms,
     #[msg("Invalid license status")]
     InvalidLicenseStatus,
+    #[msg("Invalid license type")]
+    InvalidLicenseType,
+    #[msg("Invalid license account")]
+    InvalidLicenseAccount,
+    #[msg("Invalid collection mint")]
+    InvalidCollectionMint,
+    #[msg("Invalid metadata uri length")]
+    InvalidMetadataUriLength,
 }
