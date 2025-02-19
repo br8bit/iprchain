@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-use crate::errors::ErrorCode;
+use crate::{errors::ErrorCode, state::{LicenseAccount, LicenseStatus}};
 
 #[derive(Accounts)]
 pub struct RevokeLicense<'info> {
