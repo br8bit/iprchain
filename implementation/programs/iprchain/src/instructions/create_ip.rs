@@ -8,7 +8,11 @@ use crate::{
     state::{IPAccount, IPRegistryState},
 };
 
-use super::IPCertificateArgs;
+#[derive(AnchorDeserialize, AnchorSerialize)]
+pub struct IPCertificateArgs {
+    pub name: String,
+    pub uri: String,
+}
 
 #[derive(Accounts)]
 #[instruction(ip_hash: [u8; 32], metadata_uri: String)]
