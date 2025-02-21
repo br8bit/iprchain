@@ -155,8 +155,6 @@ describe('IPRChain', async () => {
         await registerIp(ipHash, metadataUri);
         assert.fail('Should have thrown duplicate error');
       } catch (err) {
-        console.log(err);
-
         assert.include(err.message, 'DuplicateIpHash');
       }
     });
