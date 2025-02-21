@@ -1,4 +1,4 @@
-import { MPL_CORE_PROGRAM_ID, mplCore } from '@metaplex-foundation/mpl-core';
+import { MPL_CORE_PROGRAM_ID } from '@metaplex-foundation/mpl-core';
 import { Keypair, LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 import { Program, web3, BN } from '@coral-xyz/anchor';
@@ -25,7 +25,6 @@ describe('IPRChain', async () => {
 
   const admin = Keypair.generate();
   const creator = Keypair.generate();
-  const asset = Keypair.generate();
 
   const airdrop = async (user: PublicKey, sol: number = 2) => {
     const tx = await provider.connection.requestAirdrop(
@@ -76,28 +75,29 @@ describe('IPRChain', async () => {
     assert.equal(registryState.totalIps.toNumber(), 0);
   });
 
-  describe('Creates IP account with Core asset', async () => {
-    const content = `IP-${Date.now()}`;
-    const ipHash = generateIpHash(content);
+  describe('IP account with Core asset', async () => {
+    let ipAccount: PublicKey;
     const metadataUri = 'https://arweave.net/abc123';
+    const ipHash = generateIpHash('IP-123');
 
-    const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
-      [Buffer.from('iprchain'), admin.publicKey.toBuffer()],
-      program.programId
-    );
+    const registerIp = async (ipHash: number[], metadataUri: string) => {
+      const asset = Keypair.generate();
 
-    const [ipAccount] = web3.PublicKey.findProgramAddressSync(
-      [Buffer.from('ip_account'), Buffer.from(ipHash)],
-      program.programId
-    );
+      const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
+        [Buffer.from('iprchain'), admin.publicKey.toBuffer()],
+        program.programId
+      );
 
-    const [treasury] = web3.PublicKey.findProgramAddressSync(
-      [Buffer.from('treasury'), ipRegistry.toBuffer()],
-      program.programId
-    );
+      const [ipAccount] = web3.PublicKey.findProgramAddressSync(
+        [Buffer.from('ip_account'), Buffer.from(ipHash)],
+        program.programId
+      );
 
-    it('Registers IP', async () => {
-      // Execute registration
+      const [treasury] = web3.PublicKey.findProgramAddressSync(
+        [Buffer.from('treasury'), ipRegistry.toBuffer()],
+        program.programId
+      );
+
       const txId = await program.methods
         .registerIp(ipHash, metadataUri)
         .accountsPartial({
@@ -117,9 +117,19 @@ describe('IPRChain', async () => {
         .rpc({ commitment: 'confirmed' });
 
       checkErrors(txId, provider);
+
+      return [ipAccount, ipRegistry];
+    };
+
+    it('Registers IP', async () => {
+      [ipAccount] = await registerIp(ipHash, metadataUri);
+
+      const account = await program.account.ipAccount.fetch(ipAccount);
+
+      assert.exists(account);
     });
 
-    it('Verifies IP account', async () => {
+    it('Verifies IP hash and metadata', async () => {
       const account = await program.account.ipAccount.fetch(ipAccount);
 
       assert.equal(account.metadataUri, metadataUri);
@@ -131,12 +141,37 @@ describe('IPRChain', async () => {
       const coreAsset = await provider.connection.getAccountInfo(
         account.coreAsset
       );
-      assert.ok(asset, 'Core asset account missing');
+      assert.ok(coreAsset, 'Core asset account missing');
       assert.equal(
         coreAsset.owner.toBase58(),
         MPL_CORE_PROGRAM_ID,
         'Invalid Core asset owner'
       );
+    });
+
+    it('Prevents duplicate IP hash registration', async () => {
+      // Attempt duplicate
+      try {
+        await registerIp(ipHash, metadataUri);
+        assert.fail('Should have thrown duplicate error');
+      } catch (err) {
+        console.log(err);
+
+        assert.include(err.message, 'DuplicateIpHash');
+      }
+    });
+
+    it('Validates metadata URI length constraints', async () => {
+      const longUri = 'a'.repeat(201); // MAX_URI_LENGTH = 200
+      const content = `IP-${Date.now()}`;
+      const ipHash = generateIpHash(content);
+
+      try {
+        await registerIp(ipHash, longUri);
+        assert.fail('Should have rejected long URI');
+      } catch (err) {
+        assert.include(err.message, 'InvalidMetadataUriLength');
+      }
     });
   });
 });
