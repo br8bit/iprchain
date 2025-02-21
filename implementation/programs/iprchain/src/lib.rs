@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("BAbpq4BbvfHmgwHGDY4zxWBUBc2osE9f3vKvr6uGnKN");
+declare_id!("CoADrt4GSwVVujxn1HuqKMTYVVyrUqqYLG4obi68EpAh");
 
 mod constants;
 mod errors;
@@ -13,8 +13,8 @@ use instructions::*;
 pub mod iprchain {
     use super::*;
 
-    pub fn initialize(ctx: Context<IPRegistry>) -> Result<()> {
-        ctx.accounts.init(0, &ctx.bumps)?;
+    pub fn initialize(ctx: Context<IPRegistry>, fee: u64) -> Result<()> {
+        ctx.accounts.init(fee, &ctx.bumps)?;
         Ok(())
     }
 
