@@ -20,8 +20,13 @@ pub struct CreateIp<'info> {
     #[account(mut)]
     pub creator: Signer<'info>,
 
+    pub admin: Signer<'info>,
+
+    #[account(mut)]
+    pub asset: Signer<'info>,
+    
     #[account(
-        seeds = [IP_REGISTRY_SEED, ip_registry.key().as_ref()],
+        seeds = [IP_REGISTRY_SEED, admin.key().as_ref()],
         bump = ip_registry.bump,
     )]
     pub ip_registry: Account<'info, IPRegistryState>,
@@ -35,14 +40,12 @@ pub struct CreateIp<'info> {
     )]
     pub ip_account: Account<'info, IPAccount>,
 
-    #[account(
-        seeds = [TREASURY_SEED, ip_registry.key().as_ref()],
-        bump,
-    )]
-    pub treasury: SystemAccount<'info>,
-
-    #[account(mut)]
-    pub asset: Signer<'info>,
+    // #[account(
+    //     mut,
+    //     seeds = [TREASURY_SEED, ip_registry.key().as_ref()],
+    //     bump = ip_registry.treasury_bump,
+    // )]
+    // pub treasury: SystemAccount<'info>,
     
     #[account(mut)]
     pub collection: Option<Account<'info, BaseCollectionV1>>,
@@ -52,12 +55,11 @@ pub struct CreateIp<'info> {
     /// CHECK: this account will be checked by the mpl_core program
     pub update_authority: Option<UncheckedAccount<'info>>,
 
-    pub system_program: Program<'info, System>,
-
     #[account(address = MPL_CORE_ID)]
     /// CHECK: this account is checked by the address constraint
     pub mpl_core_program: UncheckedAccount<'info>,
-
+    
+    pub system_program: Program<'info, System>,
 }
 
 impl CreateIp<'_> {
@@ -70,10 +72,10 @@ impl CreateIp<'_> {
         require!(self.ip_account.ip_hash != ip_hash, ErrorCode::DuplicateIpHash);
         require!(!metadata_uri.is_empty() && metadata_uri.len() <= MAX_URI_LENGTH, ErrorCode::InvalidMetadataUriLength);
 
-        self.create_certificate(IPCertificateArgs {
+        let _ = self.create_certificate(IPCertificateArgs {
             name: "IPCertificate".to_string(),
             uri: metadata_uri.clone(),
-        })?;
+        });
 
         self.ip_account.set_inner(IPAccount {
             creator: self.creator.key(),
