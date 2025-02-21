@@ -16,7 +16,7 @@ pub struct IPRegistry<'info> {
     )]
     pub ip_registry: Account<'info, IPRegistryState>,
 
-    #[account(
+    #[account( 
         seeds = [b"treasury", ip_registry.key().as_ref()],
         bump,
     )]
