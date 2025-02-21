@@ -32,7 +32,7 @@ pub struct CreateIp<'info> {
     pub ip_registry: Account<'info, IPRegistryState>,
 
     #[account(
-        init,
+        init_if_needed,
         payer = creator,
         space = IPAccount::INIT_SPACE,
         seeds = [IP_ACCOUNT_SEED, ip_hash.as_ref()], 
