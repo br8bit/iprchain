@@ -1,12 +1,12 @@
 use anchor_lang::prelude::*;
 
-use crate::{errors::ErrorCode, state::{LicenseAccount, LicenseStatus}};
+use crate::{errors::IPRChainErrorCode, state::{LicenseAccount, LicenseStatus}};
 
 #[derive(Accounts)]
 pub struct RevokeLicense<'info> {
     #[account(
         mut, 
-        has_one = licensor @ ErrorCode::Unauthorized
+        has_one = licensor @ IPRChainErrorCode::Unauthorized
     )]
     pub license_account: Account<'info, LicenseAccount>,
 
