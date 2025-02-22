@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-use crate::errors::ErrorCode;
+use crate::errors::IPRChainErrorCode;
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone)]
 pub struct LicenseTerms {
@@ -14,13 +14,13 @@ impl LicenseTerms {
 
     pub fn validate(&self) -> Result<()> {
         if self.fee == 0 {
-            return Err(ErrorCode::InvalidFee.into());
+            return Err(IPRChainErrorCode::InvalidLicenseFee.into());
         }
         if self.expiration <= Clock::get()?.unix_timestamp {
-            return Err(ErrorCode::InvalidExpiration.into());
+            return Err(IPRChainErrorCode::InvalidExpiration.into());
         }
         if self.royalty_percent > 100 {
-            return Err(ErrorCode::InvalidRoyaltyPercent.into());
+            return Err(IPRChainErrorCode::InvalidRoyaltyPercent.into());
         }
         Ok(())
     }
