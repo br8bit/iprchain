@@ -185,7 +185,7 @@ describe('IPRChain', async () => {
       assert.equal(registryState.totalIps.toNumber(), 1);
     });
 
-    it('Ensures Platform fee is not 0', async () => {
+    it('Ensures the platform fee is within the range', async () => {
       const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
         [Buffer.from('iprchain'), admin.publicKey.toBuffer()],
         program.programId
@@ -195,7 +195,8 @@ describe('IPRChain', async () => {
         ipRegistry
       );
 
-      assert.notEqual(registryState.fee.toNumber(), 0);
+      assert.isAtLeast(registryState.fee.toNumber(), 100);
+      assert.isAtMost(registryState.fee.toNumber(), 200);
     });
   });
 });
