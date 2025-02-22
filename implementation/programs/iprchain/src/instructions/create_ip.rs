@@ -64,11 +64,6 @@ pub struct CreateIp<'info> {
 
 impl CreateIp<'_> {
     pub fn create(&mut self, ip_hash: [u8; 32], metadata_uri: String, bumps: &CreateIpBumps) -> Result<()> {
-        self.initialize(ip_hash, metadata_uri, bumps)?;
-        Ok(())
-    }
-
-    fn initialize(&mut self, ip_hash: [u8; 32], metadata_uri: String, bumps: &CreateIpBumps) -> Result<()> {
         require!(self.ip_account.ip_hash != ip_hash, ErrorCode::DuplicateIpHash);
         require!(!metadata_uri.is_empty() && metadata_uri.len() <= MAX_URI_LENGTH, ErrorCode::InvalidMetadataUriLength);
 
