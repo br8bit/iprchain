@@ -171,5 +171,31 @@ describe('IPRChain', async () => {
         assert.include(err.message, 'InvalidMetadataUriLength');
       }
     });
+
+    it('Validates Total IPs count to be 1', async () => {
+      const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
+        [Buffer.from('iprchain'), admin.publicKey.toBuffer()],
+        program.programId
+      );
+
+      const registryState = await program.account.ipRegistryState.fetch(
+        ipRegistry
+      );
+
+      assert.equal(registryState.totalIps.toNumber(), 1);
+    });
+
+    it('Ensures Platform fee is not 0', async () => {
+      const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
+        [Buffer.from('iprchain'), admin.publicKey.toBuffer()],
+        program.programId
+      );
+
+      const registryState = await program.account.ipRegistryState.fetch(
+        ipRegistry
+      );
+
+      assert.notEqual(registryState.fee.toNumber(), 0);
+    });
   });
 });
