@@ -1,7 +1,7 @@
 use anchor_lang::error_code;
 
 #[error_code]
-pub enum ErrorCode {
+pub enum IPRChainErrorCode {
     #[msg("Invalid mint decimals - must be 0 for NFTs")]
     InvalidMintDecimals,
     #[msg("Invalid mint supply - must be 1 for NFTs")]
@@ -22,8 +22,8 @@ pub enum ErrorCode {
     RoyaltyDistributionFailed,
     #[msg("Invalid royalty percent")]
     InvalidRoyaltyPercent,
-    #[msg("Invalid fee")]
-    InvalidFee,
+    #[msg("Platform fee should be within the range of 1% to 2%")]
+    InvalidPlatformFee,
     #[msg("Invalid license terms")]
     InvalidLicenseTerms,
     #[msg("Invalid license status")]
@@ -32,6 +32,8 @@ pub enum ErrorCode {
     InvalidLicenseType,
     #[msg("Invalid license account")]
     InvalidLicenseAccount,
+    #[msg("Invalid license fee")]
+    InvalidLicenseFee,
     #[msg("Invalid collection mint")]
     InvalidCollectionMint,
     #[msg("Invalid metadata uri length")]
