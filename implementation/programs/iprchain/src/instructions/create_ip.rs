@@ -4,7 +4,7 @@ use mpl_core::{accounts::BaseCollectionV1, instructions::CreateV2CpiBuilder, ID 
     
 use crate::{
     constants::{IP_ACCOUNT_SEED, IP_REGISTRY_SEED, TREASURY_SEED},
-    errors::ErrorCode,
+    errors::IPRChainErrorCode as ErrorCode,
     state::{IPAccount, IPRegistryState},
 };
 
@@ -26,6 +26,7 @@ pub struct CreateIp<'info> {
     pub asset: Signer<'info>,
     
     #[account(
+        mut,
         seeds = [IP_REGISTRY_SEED, admin.key().as_ref()],
         bump = ip_registry.bump,
     )]
@@ -80,6 +81,9 @@ impl CreateIp<'_> {
             created_at: Clock::get()?.unix_timestamp,
             metadata_uri,
         });
+
+        self.ip_registry.total_ips += 1;
+
         Ok(())
     }
 
