@@ -208,4 +208,46 @@ describe('IPRChain', async () => {
       assert.isAtMost(registryState.fee.toNumber(), 200);
     });
   });
+
+  describe('License account with License terms', async () => {
+    const fee = new BN(100);
+    const royalty = 10;
+
+    it('Initializes License Account', async () => {
+      const [licenseAccount] = web3.PublicKey.findProgramAddressSync(
+        [...LICENSE_ACCOUNT_SEED, Buffer.from(ipHash)],
+        program.programId
+      );
+
+      const [ipAccount] = web3.PublicKey.findProgramAddressSync(
+        [IP_ACCOUNT_SEED, Buffer.from(ipHash)],
+        program.programId
+      );
+
+      const currentTime = await provider.connection.getSlot();
+      const currentTimestamp = await provider.connection.getBlockTime(
+        currentTime
+      );
+      const startsAt = new BN(currentTimestamp + 60); // 60 seconds from now
+      const expiresAt = new BN(currentTimestamp + 3600); // 1 hour from starts_at
+
+      await program.methods
+        .createLicense(fee, startsAt, expiresAt, royalty)
+        .accountsPartial({
+          creator: creator.publicKey,
+          licenseAccount,
+          ipAccount,
+          systemProgram: web3.SystemProgram.programId,
+        })
+        .signers([creator])
+        .rpc({ commitment: 'confirmed' });
+
+      const account = await program.account.licenseAccount.fetch(
+        licenseAccount
+      );
+
+      assert.equal(account.creator.toBase58(), creator.publicKey.toBase58());
+      assert.exists(account.terms, "License terms don't exist");
+    });
+  });
 });
