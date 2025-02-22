@@ -1,2 +1,0 @@
-# Capstone Project
-Capstone project 
