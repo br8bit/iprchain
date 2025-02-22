@@ -23,9 +23,6 @@ describe('IPRChain', async () => {
   anchor.setProvider(provider);
   const program = anchor.workspace.Iprchain as Program<Iprchain>;
 
-  const admin = Keypair.generate();
-  const creator = Keypair.generate();
-
   const airdrop = async (user: PublicKey, sol: number = 2) => {
     const tx = await provider.connection.requestAirdrop(
       user,
@@ -45,6 +42,22 @@ describe('IPRChain', async () => {
 
   const generateIpHash = (content: string) =>
     Array.from(createHash('sha256').update(content).digest());
+
+  let ipAccount: PublicKey;
+  const admin = Keypair.generate();
+  const creator = Keypair.generate();
+  const metadataUri = 'https://arweave.net/abc123';
+  const ipHash = generateIpHash('IP-123');
+
+  const IP_ACCOUNT_SEED = Buffer.from('ip_account');
+  const IP_REGISTRY_SEED = [
+    Buffer.from('iprchain'),
+    admin.publicKey.toBuffer(),
+  ];
+  const LICENSE_ACCOUNT_SEED = [
+    Buffer.from('license'),
+    creator.publicKey.toBuffer(),
+  ];
 
   beforeEach(async () => {
     await airdrop(admin.publicKey);
@@ -76,20 +89,16 @@ describe('IPRChain', async () => {
   });
 
   describe('IP account with Core asset', async () => {
-    let ipAccount: PublicKey;
-    const metadataUri = 'https://arweave.net/abc123';
-    const ipHash = generateIpHash('IP-123');
-
     const registerIp = async (ipHash: number[], metadataUri: string) => {
       const asset = Keypair.generate();
 
       const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
-        [Buffer.from('iprchain'), admin.publicKey.toBuffer()],
+        IP_REGISTRY_SEED,
         program.programId
       );
 
       const [ipAccount] = web3.PublicKey.findProgramAddressSync(
-        [Buffer.from('ip_account'), Buffer.from(ipHash)],
+        [IP_ACCOUNT_SEED, Buffer.from(ipHash)],
         program.programId
       );
 
@@ -174,7 +183,7 @@ describe('IPRChain', async () => {
 
     it('Validates Total IPs count to be 1', async () => {
       const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
-        [Buffer.from('iprchain'), admin.publicKey.toBuffer()],
+        IP_REGISTRY_SEED,
         program.programId
       );
 
@@ -187,7 +196,7 @@ describe('IPRChain', async () => {
 
     it('Ensures the platform fee is within the range', async () => {
       const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
-        [Buffer.from('iprchain'), admin.publicKey.toBuffer()],
+        IP_REGISTRY_SEED,
         program.programId
       );
 
