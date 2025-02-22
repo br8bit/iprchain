@@ -8,6 +8,8 @@ pub enum IPRChainErrorCode {
     InvalidMintSupply,
     #[msg("Duplicate IP hash detected")]
     DuplicateIpHash,
+    #[msg("Invalid start time")]
+    InvalidStartDate,
     #[msg("Invalid license expiration time")]
     InvalidExpiration,
     #[msg("Unauthorized access")]
