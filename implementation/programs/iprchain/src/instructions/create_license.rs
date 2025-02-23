@@ -17,7 +17,7 @@ pub struct CreateLicense<'info> {
     pub ip_account: Account<'info, IPAccount>,
 
     #[account(
-        init_if_needed,
+        init,
         payer = creator,
         space = 8 + LicenseAccount::INIT_SPACE,
         seeds = [LICENSE_ACCOUNT_SEED, creator.key.as_ref(), ip_account.ip_hash.as_ref()], 

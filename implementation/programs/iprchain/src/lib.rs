@@ -38,4 +38,9 @@ pub mod iprchain {
             .create(fee, starts_at, expires_at, royalty_percent, &ctx.bumps)?;
         Ok(())
     }
+
+    pub fn assign_licensee(ctx: Context<AssignLicensee>) -> Result<()> {
+        ctx.accounts.assign()?;
+        Ok(())
+    }
 }

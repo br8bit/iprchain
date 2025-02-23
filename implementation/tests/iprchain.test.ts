@@ -268,7 +268,7 @@ describe('IPRChain', async () => {
       );
     });
 
-    it('Valitates License terms', async () => {
+    it('Validates License terms', async () => {
       assert.exists(licenseAccount.terms, "License terms don't exist");
       assert.equal(licenseAccount.terms.fee.toNumber(), 100);
       assert.equal(licenseAccount.terms.royaltyPercent, 10);
@@ -287,6 +287,37 @@ describe('IPRChain', async () => {
       assert.isAtMost(
         licenseAccount.terms.expiresAt.toNumber(),
         currentTimestamp + 3600
+      );
+    });
+
+    it('Assign and verify licensee is set', async () => {
+      const [licenseAccount] = web3.PublicKey.findProgramAddressSync(
+        [...LICENSE_ACCOUNT_SEED, Buffer.from(ipHash)],
+        program.programId
+      );
+
+      const licensee = Keypair.generate();
+      await airdrop(licensee.publicKey);
+      const txId = await program.methods
+        .assignLicensee()
+        .accountsPartial({
+          licenseAccount,
+          ipAccount,
+          licensee: licensee.publicKey,
+          systemProgram: web3.SystemProgram.programId,
+        })
+        .signers([licensee])
+        .rpc({ commitment: 'confirmed' });
+
+      const account = await program.account.licenseAccount.fetch(
+        licenseAccount
+      );
+
+      assert.exists(account.licensee);
+      assert.equal(
+        account.licensee.toBase58(),
+        licensee.publicKey.toBase58(),
+        'Licensee should be set to the new user'
       );
     });
   });
