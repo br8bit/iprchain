@@ -24,7 +24,7 @@ pub struct IPRegistry<'info> {
 
 impl IPRegistry<'_> {
     pub fn init(&mut self, fee: u64, bumps: &IPRegistryBumps) -> Result<()> {
-        require!(fee >= MIN_PLATFORM_FEE && fee <= MAX_PLATFORM_FEE, IPRChainErrorCode::InvalidPlatformFee);
+        require!((MIN_PLATFORM_FEE..=MAX_PLATFORM_FEE).contains(&fee), IPRChainErrorCode::InvalidPlatformFee);
         self.ip_registry.set_inner(IPRegistryState {
             admin: self.admin.key(),
             fee,
