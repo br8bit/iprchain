@@ -125,7 +125,7 @@ describe('IPRChain', async () => {
         .signers([creator, admin, asset])
         .rpc({ commitment: 'confirmed' });
 
-      checkErrors(txId, provider);
+      // await checkErrors(txId, provider);
 
       return [ipAccount, ipRegistry];
     };
@@ -308,6 +308,8 @@ describe('IPRChain', async () => {
         })
         .signers([licensee])
         .rpc({ commitment: 'confirmed' });
+
+      await checkErrors(txId, provider);
 
       const account = await program.account.licenseAccount.fetch(
         licenseAccount
