@@ -20,6 +20,14 @@ pub enum IPRChainErrorCode {
     LicenseNotActive,
     #[msg("Licensee does not match license account")]
     LicenseeMismatch,
+    #[msg("Licensee already assigned")]
+    LicenseeAlreadyAssigned,
+    #[msg("Licensee not assigned")]
+    LicenseeNotAssigned,
+    #[msg("Licensee not found")]
+    LicenseeNotFound,
+    #[msg("Licensee not authorized")]
+    LicenseeNotAuthorized,
     #[msg("Royalty distribution failed")]
     RoyaltyDistributionFailed,
     #[msg("Invalid royalty percent")]

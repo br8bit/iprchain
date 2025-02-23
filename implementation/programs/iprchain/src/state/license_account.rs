@@ -7,6 +7,7 @@ use super::{LicenseStatus, LicenseTerms};
 pub struct LicenseAccount {
     pub creator: Pubkey,
     pub ip_account: Pubkey,
+    pub bump: u8,
     pub licensee: Option<Pubkey>,
     pub terms: LicenseTerms,
     pub status: LicenseStatus,

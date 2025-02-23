@@ -10,8 +10,6 @@ pub struct CreateLicense<'info> {
     #[account(mut)]
     pub creator: Signer<'info>,
 
-    pub licensee: Option<Signer<'info>>,
-
     #[account(
         seeds = [IP_ACCOUNT_SEED, ip_account.ip_hash.as_ref()],
         bump = ip_account.bump,
@@ -19,7 +17,7 @@ pub struct CreateLicense<'info> {
     pub ip_account: Account<'info, IPAccount>,
 
     #[account(
-        init,
+        init_if_needed,
         payer = creator,
         space = 8 + LicenseAccount::INIT_SPACE,
         seeds = [LICENSE_ACCOUNT_SEED, creator.key.as_ref(), ip_account.ip_hash.as_ref()], 
@@ -37,6 +35,7 @@ impl CreateLicense<'_> {
         starts_at: i64,
         expires_at: i64,
         royalty_percent: u8,
+        bumps: &CreateLicenseBumps
     ) -> Result<()> {
         let terms  = LicenseTerms {
             fee,
@@ -50,7 +49,8 @@ impl CreateLicense<'_> {
         self.license_account.set_inner(LicenseAccount {
             creator: self.creator.key(),
             ip_account: self.ip_account.key(),
-            licensee: self.licensee.as_ref().map(|l| l.key()),
+            bump: bumps.license_account,
+            licensee: None,
             terms,
             status: LicenseStatus::Active,
             total_royalties_paid: 0,

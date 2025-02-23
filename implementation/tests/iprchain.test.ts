@@ -209,11 +209,13 @@ describe('IPRChain', async () => {
     });
   });
 
-  describe('License account with License terms', async () => {
-    const fee = new BN(100);
-    const royalty = 10;
+  describe('License account', async () => {
+    let licenseAccount = null;
 
-    it('Initializes License Account', async () => {
+    async function createLicense() {
+      const fee = new BN(100);
+      const royalty = 10;
+
       const [licenseAccount] = web3.PublicKey.findProgramAddressSync(
         [...LICENSE_ACCOUNT_SEED, Buffer.from(ipHash)],
         program.programId
@@ -246,8 +248,46 @@ describe('IPRChain', async () => {
         licenseAccount
       );
 
-      assert.equal(account.creator.toBase58(), creator.publicKey.toBase58());
-      assert.exists(account.terms, "License terms don't exist");
+      return account;
+    }
+
+    it('Initializes License Account', async () => {
+      licenseAccount = await createLicense();
+
+      assert.exists(licenseAccount);
+      assert.equal(
+        licenseAccount.creator.toBase58(),
+        creator.publicKey.toBase58()
+      );
+    });
+
+    it('Verifies License has no initial Licensee', async () => {
+      assert.isNull(
+        licenseAccount.licensee,
+        'Licensee should be None initially'
+      );
+    });
+
+    it('Valitates License terms', async () => {
+      assert.exists(licenseAccount.terms, "License terms don't exist");
+      assert.equal(licenseAccount.terms.fee.toNumber(), 100);
+      assert.equal(licenseAccount.terms.royaltyPercent, 10);
+    });
+
+    it('Validates License start and expiry timestamps', async () => {
+      const currentTime = await provider.connection.getSlot();
+      const currentTimestamp = await provider.connection.getBlockTime(
+        currentTime
+      );
+
+      assert.isAtLeast(
+        licenseAccount.terms.startsAt.toNumber(),
+        currentTimestamp
+      );
+      assert.isAtMost(
+        licenseAccount.terms.expiresAt.toNumber(),
+        currentTimestamp + 3600
+      );
     });
   });
 });

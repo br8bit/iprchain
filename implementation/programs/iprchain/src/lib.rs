@@ -35,7 +35,7 @@ pub mod iprchain {
         royalty_percent: u8,
     ) -> Result<()> {
         ctx.accounts
-            .create(fee, starts_at, expires_at, royalty_percent)?;
+            .create(fee, starts_at, expires_at, royalty_percent, &ctx.bumps)?;
         Ok(())
     }
 }
