@@ -1,11 +1,11 @@
-pub mod assign_licensee;
+pub mod accept_license;
 pub mod create_ip;
 pub mod create_license;
 pub mod ip_registry;
 //pub mod check_expiration;
 //pub mod revoke_license;
 
-pub use assign_licensee::*;
+pub use accept_license::*;
 pub use create_ip::*;
 pub use create_license::*;
 pub use ip_registry::*;

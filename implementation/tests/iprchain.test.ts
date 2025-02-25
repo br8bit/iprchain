@@ -291,7 +291,7 @@ describe('IPRChain', async () => {
       );
     });
 
-    it('Assign and verify licensee is set', async () => {
+    it('Accept license and verify licensee is set', async () => {
       const [licenseAccount] = web3.PublicKey.findProgramAddressSync(
         LICENSE_ACCOUNT_SEED,
         program.programId
@@ -300,7 +300,7 @@ describe('IPRChain', async () => {
       const licensee = Keypair.generate();
       await airdrop(licensee.publicKey);
       const txId = await program.methods
-        .assignLicensee()
+        .acceptLicense()
         .accountsPartial({
           licenseAccount,
           ipAccount,

@@ -7,7 +7,7 @@ use crate::{
 };
 
 #[derive(Accounts)]
-pub struct AssignLicensee<'info> {
+pub struct AcceptLicense<'info> {
     #[account(
         mut,
         seeds = [LICENSE_ACCOUNT_SEED, license_account.creator.as_ref(), ip_account.ip_hash.as_ref()],
@@ -27,8 +27,8 @@ pub struct AssignLicensee<'info> {
     pub system_program: Program<'info, System>,
 }
 
-impl AssignLicensee<'_> {
-    pub fn assign(&mut self) -> Result<()> {
+impl AcceptLicense<'_> {
+    pub fn accept_license(&mut self) -> Result<()> {
         require!(
             self.license_account.licensee.is_none(),
             IPRChainErrorCode::LicenseeAlreadyAssigned,

@@ -39,8 +39,8 @@ pub mod iprchain {
         Ok(())
     }
 
-    pub fn assign_licensee(ctx: Context<AssignLicensee>) -> Result<()> {
-        ctx.accounts.assign()?;
+    pub fn accept_license(ctx: Context<AcceptLicense>) -> Result<()> {
+        ctx.accounts.accept_license()?;
         Ok(())
     }
 }
