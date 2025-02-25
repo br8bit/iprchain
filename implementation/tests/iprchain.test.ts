@@ -57,6 +57,7 @@ describe('IPRChain', async () => {
   const LICENSE_ACCOUNT_SEED = [
     Buffer.from('license'),
     creator.publicKey.toBuffer(),
+    Buffer.from(ipHash),
   ];
 
   beforeEach(async () => {
@@ -217,7 +218,7 @@ describe('IPRChain', async () => {
       const royalty = 10;
 
       const [licenseAccount] = web3.PublicKey.findProgramAddressSync(
-        [...LICENSE_ACCOUNT_SEED, Buffer.from(ipHash)],
+        LICENSE_ACCOUNT_SEED,
         program.programId
       );
 
@@ -292,7 +293,7 @@ describe('IPRChain', async () => {
 
     it('Assign and verify licensee is set', async () => {
       const [licenseAccount] = web3.PublicKey.findProgramAddressSync(
-        [...LICENSE_ACCOUNT_SEED, Buffer.from(ipHash)],
+        LICENSE_ACCOUNT_SEED,
         program.programId
       );
 
