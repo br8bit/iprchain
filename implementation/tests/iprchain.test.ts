@@ -226,7 +226,7 @@ describe('IPRChain', async () => {
 
     async function createLicense() {
       const fee = new BN(100);
-      const royalty = 10;
+      const royaltyPercent = 10;
 
       const [licenseAccount] = web3.PublicKey.findProgramAddressSync(
         LICENSE_ACCOUNT_SEED,
@@ -246,7 +246,7 @@ describe('IPRChain', async () => {
       const expiresAt = new BN(currentTimestamp + 3600); // 1 hour from starts_at
 
       await program.methods
-        .createLicense(fee, startsAt, expiresAt, royalty)
+        .createLicense({ fee, startsAt, expiresAt, royaltyPercent })
         .accountsPartial({
           creator: creator.publicKey,
           licenseAccount,

@@ -5,6 +5,15 @@ use crate::{
     state::{IPAccount, LicenseAccount, LicenseStatus, LicenseTerms}
 };
 
+
+#[derive(AnchorDeserialize, AnchorSerialize)]
+pub struct CreateLicenseArgs {
+    pub fee: u64,
+    pub starts_at: i64,
+    pub expires_at: i64,
+    pub royalty_percent: u8,
+}
+
 #[derive(Accounts)]
 pub struct CreateLicense<'info> {
     #[account(mut)]
@@ -31,12 +40,16 @@ pub struct CreateLicense<'info> {
 impl CreateLicense<'_> {
     pub fn create(
         &mut self,
-        fee: u64,
-        starts_at: i64,
-        expires_at: i64,
-        royalty_percent: u8,
+        args: CreateLicenseArgs,
         bumps: &CreateLicenseBumps
     ) -> Result<()> {
+        let CreateLicenseArgs {
+            fee,
+            starts_at,
+            expires_at,
+            royalty_percent,
+        } = args;
+        
         let terms  = LicenseTerms {
             fee,
             starts_at,

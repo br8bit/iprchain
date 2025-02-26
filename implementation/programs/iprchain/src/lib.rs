@@ -27,15 +27,8 @@ pub mod iprchain {
         Ok(())
     }
 
-    pub fn create_license(
-        ctx: Context<CreateLicense>,
-        fee: u64,
-        starts_at: i64,
-        expires_at: i64,
-        royalty_percent: u8,
-    ) -> Result<()> {
-        ctx.accounts
-            .create(fee, starts_at, expires_at, royalty_percent, &ctx.bumps)?;
+    pub fn create_license(ctx: Context<CreateLicense>, args: CreateLicenseArgs) -> Result<()> {
+        ctx.accounts.create(args, &ctx.bumps)?;
         Ok(())
     }
 
