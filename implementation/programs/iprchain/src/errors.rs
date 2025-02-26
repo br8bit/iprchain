@@ -6,6 +6,8 @@ pub enum IPRChainErrorCode {
     InvalidMintDecimals,
     #[msg("Invalid mint supply - must be 1 for NFTs")]
     InvalidMintSupply,
+    #[msg("Invalid IP hash")]
+    InvalidIpHash,
     #[msg("Duplicate IP hash detected")]
     DuplicateIpHash,
     #[msg("Invalid start time")]

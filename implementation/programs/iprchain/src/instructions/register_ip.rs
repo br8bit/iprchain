@@ -8,14 +8,14 @@ use crate::{
 };
 
 #[derive(AnchorDeserialize, AnchorSerialize)]
-pub struct IPCertificateArgs {
-    pub name: String,
-    pub uri: String,
+pub struct RegisterIpArgs {
+    pub ip_hash: [u8; 32],
+    pub metadata_uri: String,
 }
 
 #[derive(Accounts)]
 #[instruction(ip_hash: [u8; 32], metadata_uri: String)]
-pub struct CreateIp<'info> {
+pub struct RegisterIp<'info> {
     #[account(mut)]
     pub creator: Signer<'info>,
 
@@ -40,8 +40,14 @@ pub struct CreateIp<'info> {
     pub system_program: Program<'info, System>,
 }
 
-impl CreateIp<'_> {
-    pub fn create(&mut self, ip_hash: [u8; 32], metadata_uri: String, bumps: &CreateIpBumps) -> Result<()> {
+impl RegisterIp<'_> {
+    pub fn register(&mut self, args: RegisterIpArgs, bumps: &RegisterIpBumps) -> Result<()> {
+        let RegisterIpArgs {
+            ip_hash,
+            metadata_uri,
+        } = args;
+
+        require!(!ip_hash.is_empty(), ErrorCode::InvalidIpHash);
         require!(self.ip_account.ip_hash != ip_hash, ErrorCode::DuplicateIpHash);
         require!(!metadata_uri.is_empty() && metadata_uri.len() <= MAX_URI_LENGTH, ErrorCode::InvalidMetadataUriLength);
 

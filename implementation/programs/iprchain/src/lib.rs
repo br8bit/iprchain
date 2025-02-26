@@ -18,12 +18,8 @@ pub mod iprchain {
         Ok(())
     }
 
-    pub fn register_ip(
-        ctx: Context<CreateIp>,
-        ip_hash: [u8; 32],
-        metadata_uri: String,
-    ) -> Result<()> {
-        ctx.accounts.create(ip_hash, metadata_uri, &ctx.bumps)?;
+    pub fn register_ip(ctx: Context<RegisterIp>, args: RegisterIpArgs) -> Result<()> {
+        ctx.accounts.register(args, &ctx.bumps)?;
         Ok(())
     }
 

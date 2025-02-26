@@ -109,7 +109,7 @@ describe('IPRChain', async () => {
       );
 
       const txId = await program.methods
-        .registerIp(ipHash, metadataUri)
+        .registerIp({ ipHash, metadataUri })
         .accountsPartial({
           creator: creator.publicKey,
           admin: admin.publicKey,
