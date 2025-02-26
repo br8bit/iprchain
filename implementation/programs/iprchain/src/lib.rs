@@ -43,4 +43,12 @@ pub mod iprchain {
         ctx.accounts.accept_license()?;
         Ok(())
     }
+
+    pub fn create_certificate(
+        ctx: Context<CreateCertificate>,
+        args: CertificateArgs,
+    ) -> Result<()> {
+        ctx.accounts.create_certificate(args)?;
+        Ok(())
+    }
 }

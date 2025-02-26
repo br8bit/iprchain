@@ -90,9 +90,9 @@ describe('IPRChain', async () => {
   });
 
   describe('IP account with Core asset', async () => {
-    const registerIp = async (ipHash: number[], metadataUri: string) => {
-      const asset = Keypair.generate();
+    const asset = Keypair.generate();
 
+    const registerIp = async (ipHash: number[], metadataUri: string) => {
       const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
         IP_REGISTRY_SEED,
         program.programId
@@ -112,21 +112,13 @@ describe('IPRChain', async () => {
         .registerIp(ipHash, metadataUri)
         .accountsPartial({
           creator: creator.publicKey,
-          asset: asset.publicKey,
           admin: admin.publicKey,
           ipAccount,
           ipRegistry,
-          // treasury,
-          collection: null,
-          updateAuthority: null,
-          authority: null,
-          mplCoreProgram: MPL_CORE_PROGRAM_ID,
           systemProgram: web3.SystemProgram.programId,
         })
-        .signers([creator, admin, asset])
+        .signers([creator, admin])
         .rpc({ commitment: 'confirmed' });
-
-      // await checkErrors(txId, provider);
 
       return [ipAccount, ipRegistry];
     };
@@ -146,7 +138,26 @@ describe('IPRChain', async () => {
       assert.deepEqual(account.ipHash, ipHash);
     });
 
-    it('Verifies Core asset exists', async () => {
+    it('Verifies Certificate/Core asset is created', async () => {
+      const certificateName = 'Certificate';
+      const certificateUrl = 'https://arweave.net/abc123';
+
+      const txId = await program.methods
+        .createCertificate({ name: certificateName, uri: certificateUrl })
+        .accountsPartial({
+          creator: creator.publicKey,
+          asset: asset.publicKey,
+          owner: creator.publicKey,
+          ipAccount,
+          collection: null,
+          updateAuthority: null,
+          authority: creator.publicKey,
+          mplCoreProgram: MPL_CORE_PROGRAM_ID,
+          systemProgram: web3.SystemProgram.programId,
+        })
+        .signers([asset, creator])
+        .rpc({ commitment: 'confirmed' });
+
       const account = await program.account.ipAccount.fetch(ipAccount);
       const coreAsset = await provider.connection.getAccountInfo(
         account.coreAsset
