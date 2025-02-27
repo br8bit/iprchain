@@ -1,4 +1,4 @@
-use anchor_lang::prelude::*;
+use anchor_lang::{prelude::*, system_program::{Transfer, transfer}};
 use anchor_spl::metadata::mpl_token_metadata::MAX_URI_LENGTH;
     
 use crate::{
@@ -34,6 +34,13 @@ pub struct RegisterIp<'info> {
         bump,
     )]
     pub ip_account: Account<'info, IPAccount>,
+
+    #[account( 
+        mut,
+        seeds = [TREASURY_SEED, ip_registry.key().as_ref()],
+        bump = ip_registry.treasury_bump,
+    )]
+    pub treasury: SystemAccount<'info>,
     
     pub system_program: Program<'info, System>,
 }
@@ -43,22 +50,41 @@ impl RegisterIp<'_> {
         let RegisterIpArgs {
             ip_hash,
             metadata_uri,
-        } = args;
+        } = &args;
 
         require!(!ip_hash.is_empty(), ErrorCode::InvalidIpHash);
-        require!(self.ip_account.ip_hash != ip_hash, ErrorCode::DuplicateIpHash);
+        require!(self.ip_account.ip_hash != *ip_hash, ErrorCode::DuplicateIpHash);
         require!(!metadata_uri.is_empty() && metadata_uri.len() <= MAX_URI_LENGTH, ErrorCode::InvalidMetadataUriLength);
 
+        self.pay_fees()?;
+        self.init(args, bumps)?;
+        self.ip_registry.total_ips += 1;
+
+        Ok(())
+    }
+
+    fn init(&mut self, args: RegisterIpArgs, bumps: &RegisterIpBumps) -> Result<()> {
         self.ip_account.set_inner(IPAccount {
             creator: self.creator.key(),
             core_asset: None,
-            ip_hash,
+            ip_hash: args.ip_hash,
             bump: bumps.ip_account,
             created_at: Clock::get()?.unix_timestamp,
-            metadata_uri,
+            metadata_uri: args.metadata_uri,
         });
 
-        self.ip_registry.total_ips += 1;
+        Ok(())
+    }
+
+    fn pay_fees(&mut self) -> Result<()> {
+        let cpi_ctx = CpiContext::new(
+            self.system_program.to_account_info(),
+            Transfer {
+                from: self.creator.to_account_info(),
+                to: self.treasury.to_account_info(),
+            }
+        );
+        transfer(cpi_ctx, self.ip_registry.fee)?;
 
         Ok(())
     }
