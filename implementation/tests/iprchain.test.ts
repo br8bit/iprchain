@@ -112,12 +112,11 @@ describe('IPRChain', async () => {
         .registerIp({ ipHash, metadataUri })
         .accountsPartial({
           creator: creator.publicKey,
-          admin: admin.publicKey,
           ipAccount,
           ipRegistry,
           systemProgram: web3.SystemProgram.programId,
         })
-        .signers([creator, admin])
+        .signers([creator])
         .rpc({ commitment: 'confirmed' });
 
       return [ipAccount, ipRegistry];

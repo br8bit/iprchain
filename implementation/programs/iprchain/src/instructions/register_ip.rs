@@ -19,11 +19,9 @@ pub struct RegisterIp<'info> {
     #[account(mut)]
     pub creator: Signer<'info>,
 
-    pub admin: Signer<'info>,
-    
     #[account(
         mut,
-        seeds = [IP_REGISTRY_SEED, admin.key().as_ref()],
+        seeds = [IP_REGISTRY_SEED, ip_registry.admin.key().as_ref()],
         bump = ip_registry.bump,
     )]
     pub ip_registry: Account<'info, IPRegistryState>,
