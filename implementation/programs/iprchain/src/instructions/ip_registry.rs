@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-use crate::{constants::{MIN_PLATFORM_FEE, TREASURY_SEED}, errors::IPRChainErrorCode, state::IPRegistryState};
+use crate::{constants::{IP_REGISTRY_SEED, MIN_PLATFORM_FEE, TREASURY_SEED}, errors::IPRChainErrorCode, state::IPRegistryState};
 
 #[derive(Accounts)]
 pub struct IPRegistry<'info> {
@@ -10,7 +10,7 @@ pub struct IPRegistry<'info> {
         init,
         payer = admin,
         space = 8 + IPRegistryState::INIT_SPACE,
-        seeds = [b"iprchain", admin.key().as_ref()],
+        seeds = [IP_REGISTRY_SEED, admin.key().as_ref()],
         bump,
     )]
     pub ip_registry: Account<'info, IPRegistryState>,
