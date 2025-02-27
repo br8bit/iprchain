@@ -58,7 +58,7 @@ impl RegisterIp<'_> {
 
         self.pay_fees()?;
         self.init(args, bumps)?;
-        self.ip_registry.total_ips += 1;
+        self.ip_registry.increment_total_ips();
 
         Ok(())
     }
