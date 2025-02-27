@@ -59,6 +59,7 @@ describe('IPRChain', async () => {
     creator.publicKey.toBuffer(),
     Buffer.from(ipHash),
   ];
+  const MIN_PLATFORM_FEE = new BN(0.03 * 1e9);
 
   beforeEach(async () => {
     await airdrop(admin.publicKey);
@@ -72,7 +73,7 @@ describe('IPRChain', async () => {
     );
 
     await program.methods
-      .initialize(new BN(100))
+      .initialize(MIN_PLATFORM_FEE)
       .accountsPartial({
         ipRegistry,
         admin: admin.publicKey,
@@ -87,6 +88,19 @@ describe('IPRChain', async () => {
 
     assert.equal(registryState.admin.toBase58(), admin.publicKey.toBase58());
     assert.equal(registryState.totalIps.toNumber(), 0);
+  });
+
+  it('Ensures a minimum platform fee is set', async () => {
+    const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
+      IP_REGISTRY_SEED,
+      program.programId
+    );
+
+    const registryState = await program.account.ipRegistryState.fetch(
+      ipRegistry
+    );
+
+    assert.isAtLeast(registryState.fee.toNumber(), MIN_PLATFORM_FEE.toNumber());
   });
 
   describe('IP account with Core asset', async () => {
@@ -113,6 +127,7 @@ describe('IPRChain', async () => {
         .accountsPartial({
           creator: creator.publicKey,
           ipAccount,
+          treasury,
           ipRegistry,
           systemProgram: web3.SystemProgram.programId,
         })
@@ -128,6 +143,21 @@ describe('IPRChain', async () => {
       const account = await program.account.ipAccount.fetch(ipAccount);
 
       assert.exists(account);
+    });
+
+    it('Verifies the platform fee is collected', async () => {
+      const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
+        [Buffer.from('iprchain'), admin.publicKey.toBuffer()],
+        program.programId
+      );
+
+      const [treasury] = web3.PublicKey.findProgramAddressSync(
+        [Buffer.from('treasury'), ipRegistry.toBuffer()],
+        program.programId
+      );
+
+      const treasuryBalance = await provider.connection.getBalance(treasury);
+      assert.equal(treasuryBalance, MIN_PLATFORM_FEE.toNumber());
     });
 
     it('Verifies IP hash and metadata', async () => {
@@ -192,7 +222,7 @@ describe('IPRChain', async () => {
       }
     });
 
-    it('Validates Total IPs count to be 1', async () => {
+    it('Validates Total IPs count is 1', async () => {
       const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
         IP_REGISTRY_SEED,
         program.programId
@@ -203,20 +233,6 @@ describe('IPRChain', async () => {
       );
 
       assert.equal(registryState.totalIps.toNumber(), 1);
-    });
-
-    it('Ensures the platform fee is within the range', async () => {
-      const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
-        IP_REGISTRY_SEED,
-        program.programId
-      );
-
-      const registryState = await program.account.ipRegistryState.fetch(
-        ipRegistry
-      );
-
-      assert.isAtLeast(registryState.fee.toNumber(), 100);
-      assert.isAtMost(registryState.fee.toNumber(), 200);
     });
   });
 
