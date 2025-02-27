@@ -350,4 +350,48 @@ describe('IPRChain', async () => {
       );
     });
   });
+
+  describe('Admin account', () => {
+    it('Withdraws funds from treasury', async () => {
+      const [ipRegistry] = web3.PublicKey.findProgramAddressSync(
+        IP_REGISTRY_SEED,
+        program.programId
+      );
+
+      const [treasury] = web3.PublicKey.findProgramAddressSync(
+        [Buffer.from('treasury'), ipRegistry.toBuffer()],
+        program.programId
+      );
+
+      const adminBalance = await provider.connection.getBalance(
+        admin.publicKey
+      );
+      const treasuryBalance = await provider.connection.getBalance(treasury);
+
+      const txId = await program.methods
+        .withdraw()
+        .accountsPartial({
+          admin: admin.publicKey,
+          ipRegistry,
+          treasury,
+          systemProgram: web3.SystemProgram.programId,
+        })
+        .signers([admin])
+        .rpc({ commitment: 'confirmed' });
+
+      const treasuryBalanceAfter = await provider.connection.getBalance(
+        treasury
+      );
+      const adminBalanceAfter = await provider.connection.getBalance(
+        admin.publicKey
+      );
+
+      assert.equal(treasuryBalanceAfter, 0, 'Treasury balance should be 0');
+      assert.equal(
+        adminBalanceAfter,
+        adminBalance + treasuryBalance,
+        'Admin balance should increase by the amount of funds in the treasury'
+      );
+    });
+  });
 });

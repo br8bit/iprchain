@@ -50,4 +50,6 @@ pub enum IPRChainErrorCode {
     InvalidCollectionMint,
     #[msg("Invalid metadata uri length")]
     InvalidMetadataUriLength,
+    #[msg("Invalid withdrawal amount")]
+    InvalidWithdrawalAmount,
 }

@@ -40,4 +40,8 @@ pub mod iprchain {
         ctx.accounts.create_certificate(args)?;
         Ok(())
     }
+
+    pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
+        ctx.accounts.withdraw()
+    }
 }
