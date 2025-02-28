@@ -11,7 +11,8 @@ iprchain = "CoADrt4GSwVVujxn1HuqKMTYVVyrUqqYLG4obi68EpAh"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+# cluster = "Localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
