@@ -6,11 +6,11 @@ use crate::{errors::IPRChainErrorCode, state::{LicenseAccount, LicenseStatus}};
 pub struct RevokeLicense<'info> {
     #[account(
         mut, 
-        has_one = licensor @ IPRChainErrorCode::Unauthorized
+        has_one = creator @ IPRChainErrorCode::Unauthorized
     )]
     pub license_account: Account<'info, LicenseAccount>,
 
-    pub licensor: Signer<'info>,
+    pub creator: Signer<'info>,
 }
 
 impl<'info> RevokeLicense<'info> {
