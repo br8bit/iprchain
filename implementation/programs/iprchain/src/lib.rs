@@ -44,4 +44,8 @@ pub mod iprchain {
     pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
         ctx.accounts.withdraw()
     }
+
+    pub fn revoke_license(ctx: Context<RevokeLicense>) -> Result<()> {
+        ctx.accounts.revoke()
+    }
 }
