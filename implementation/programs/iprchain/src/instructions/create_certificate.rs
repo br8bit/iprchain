@@ -42,7 +42,7 @@ pub struct CreateCertificate<'info> {
     pub system_program: Program<'info, System>,
 }
 
-impl<'info> CreateCertificate<'info> {
+impl CreateCertificate<'_> {
     pub fn create_certificate(&mut self, args: CertificateArgs) -> Result<()> {
         let collection = &self.collection.as_ref().map(|c| c.to_account_info());
 

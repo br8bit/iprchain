@@ -30,7 +30,7 @@ pub struct Withdraw<'info> {
     system_program: Program<'info, System>,
 }
 
-impl<'info> Withdraw<'info> {
+impl Withdraw<'_> {
     pub fn withdraw(&mut self) -> Result<()> {
         require!(
             self.admin.key() == self.ip_registry.admin,

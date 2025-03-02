@@ -13,7 +13,7 @@ pub struct RevokeLicense<'info> {
     pub creator: Signer<'info>,
 }
 
-impl<'info> RevokeLicense<'info> {
+impl RevokeLicense<'_> {
     pub fn revoke(&mut self) -> Result<()> {
         self.license_account.status = LicenseStatus::Revoked;
         Ok(())
