@@ -173,7 +173,7 @@ sequenceDiagram
     deactivate Frontend
 ```
 
-### Laywer
+### Lawyer
 
 ```mermaid
 sequenceDiagram
